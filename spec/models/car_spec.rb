@@ -3,19 +3,19 @@ require 'rails_helper'
 RSpec.describe Car, type: :model do
   describe '#model validations' do
     it 'should test that factory is vaild' do
-      expect(FactoryBot.build :car).to be_valid
+      expect(FactoryBot.create :car).to be_valid
     end
 
     it 'should validate the presence of a name' do
-      car = FactoryBot.build :car, name: ""
+      car = FactoryBot.create :car, name: ""
       expect(car).not_to be_valid
       expect(car.errors.messages[:name]).to include("can't be blank")
     end
 
     it 'should validate the presence of a model' do
-      car = FactoryBot.build :car, model: ""
+      car = FactoryBot.create :car, model: ""
       expect(car).not_to be_valid
-      expect(car.errors.messgages[:model]).to include("can't be blank")
+      expect(car.errors.messages[:model]).to include("can't be blank")
     end
 
     it 'should validate that price is a string ' do
@@ -29,7 +29,7 @@ RSpec.describe Car, type: :model do
     end
 
     it 'should validate that summary is not null' do
-      car = FactoryBot.build :car, summary: ""
+      car = FactoryBot.create :car, summary: ""
       expect(car.summary).not_to be_valid
       expeect(car.errors.messages[:summary]).to include("can't be blank")
     end
@@ -47,13 +47,13 @@ RSpec.describe Car, type: :model do
     end
 
     it 'should validate that drive is a string' do
-      car = FactoryBot.build :car, drive: ""
+      car = FactoryBot.create :car, drive: ""
       expect(car).not_to be_valid
       expect(car.errors.messages[:drive]).to include("can't be blank")
     end
 
     it 'should validate that body is a string' do
-      car = FactoryBot.build :car, body: ""
+      car = FactoryBot.create :car, body: ""
       expect(car.body).not_to be_valid
       expect(car.errors.messages[:body]).to include("can't be blank")
     end
@@ -65,13 +65,13 @@ RSpec.describe Car, type: :model do
     end
 
     it 'should validate that image2 is a string' do
-      car = FactoryBot.build :car, image2: ""
+      car = FactoryBot.create :car, image2: ""
       expect(car.image2).not_to be_valid
       expect(car.errors.messages[:image2]).to include("can't be blank")
     end
 
     it 'should validate that make_id is not empty' do
-      car = FactoryBot.build :car, make_id: ""
+      car = FactoryBot.create :car, make_id: ""
       expect(car).not_to be_valid
       expect(car.errors.messages[:make_id]).to include("can't be blank")
     end

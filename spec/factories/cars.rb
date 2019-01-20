@@ -1,24 +1,23 @@
 FactoryBot.define do
 
-  factory :car do
-    name { "MyString" }
-    model { "MyString" }
-    price { "MyString" }
+  factory :car, aliases: [:maker] do
+    name { "S 560" }
+    model { "Maybach" }
+    price { "$170,750" }
     favorite { false }
     summary { "MyText" }
-    horsepower { 1 }
+    horsepower { 463 }
     max_speed { 1 }
-    acceleration_secs { 1.5 }
-    drive { "MyString" }
-    body { "MyString" }
+    acceleration_secs { 4.7 }
+    drive { "AWD" }
+    body { "Sedan" }
     image1 { "MyString" }
     image2 { "MyString" }
-    make { nil }
+    make_id { nil }
   end
 
-  factory :car_with_make  do
-    after_create do |car|
-      car.makes << Factory.create(:make)
-    end
-  end
 end
+
+
+
+
