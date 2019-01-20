@@ -3,31 +3,60 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::CarsController do
   
-  describe '#index' do
-    it 'should return success response' do 
+  describe 'GET #index' do
+    before do
       get :index
+    end
+
+    it 'should return success response' do 
       expect(response).to have_http_status(:ok)
     end
     
-    it 'should return proper json' do
-      get :index
-      json JSON.parse(response.body)
-      json_data = json[:data]
-      expect(json_data.length).to eq(16)
+    it 'should return json body that contains car attributes' do
+      json_response = json JSON.parse(response.body)
+      expect(hash_body.keys).to match_array([:name, :model, :price, :summary, :horsepower, :favorite, :max_speed, :image2, :image1, :body, :drive, :make_id, :acceleration_secs])
     end
   end
 
-  describe '#show' do
+  describe 'GET #show' do
+    
+    before do
+      get :show, id: car.id
+    end
+
+    let(:make) {Make.create(name: "Toyota")}
+    let(:car) {Car.create(name: "Oasis", model: "CRX", price: "$60,000", summary: "Nice Car", horsepower: 100, favorite: false, max_speed: 75, image2: "n/a", image1: 'n/a', body: "4WD", drive: "SUV", make_id: 8, acceleration_secs: 18.4)}
+
     it 'should return success response' do 
-      get :show
       expect(response).to have_http_status(:ok)
     end
 
-    it 'should return proper json' do
-      get :show
-      json JSON.parse(response.body)
-      json_data = json[:data]
-      expcet(json_data.length).to eq(16)
+    it 'should return JSON body containing proper Car attributes' do
+      hash_body = nil
+      
+      expect { hash_body = JSON.parse(response.body).with_indifferent_access }.not_to raise_exception
+      
+      expect(hash_body.keys).to match_array([:name, :model, :price, :summary, :horsepower, :favorite, :max_speed, :image2, :image1, :body, :drive, :make_id, :acceleration_secs])
+
+      expect(hash_body).match({
+        name: "Oasis", 
+        model: "CRX", 
+        price: "$60,000", 
+        summary: "Nice Car", 
+        horsepower: 100, 
+        favorite: false, 
+        max_speed: 75, 
+        image2: "n/a", 
+        image1: 'n/a', 
+        body: "4WD", 
+        drive: "SUV", 
+        make_id: 8, 
+        acceleration_secs: 18.4
+      })
+
+
+
     end
   end
+
 end

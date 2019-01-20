@@ -29,4 +29,5 @@ describe Api::V1::MakesController do
       expect(json_data.length).to eq(1)
     end
   end
+  
 end
