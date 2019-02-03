@@ -1,7 +1,8 @@
 
 
-ActiveRecord::Schema.define(version: 2019_01_19_204544) do
+ActiveRecord::Schema.define(version: 2019_01_21_165830) do
 
+  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "cars", force: :cascade do |t|
@@ -20,6 +21,8 @@ ActiveRecord::Schema.define(version: 2019_01_19_204544) do
     t.bigint "make_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "likes"
+    t.integer "unique"
     t.index ["make_id"], name: "index_cars_on_make_id"
   end
 
@@ -36,6 +39,7 @@ ActiveRecord::Schema.define(version: 2019_01_19_204544) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "unique"
   end
 
   create_table "users", force: :cascade do |t|

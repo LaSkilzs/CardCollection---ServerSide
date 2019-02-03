@@ -1,6 +1,6 @@
 class MakeSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :name
+  attributes :name, :unique
 
   has_many :cars
 end
